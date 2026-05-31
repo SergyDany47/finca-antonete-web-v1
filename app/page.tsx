@@ -908,10 +908,11 @@ export default function HomePage() {
                     <label>Email corporativo</label>
                     <input type="email" placeholder="nombre@empresa.com" required />
                   </div>
-                  <label className="form-consent">
-                    <input type="checkbox" required /> He leido y acepto la <a href="#">politica de privacidad</a> y las{" "}
-                    <a href="#">bases reguladoras</a>, y consiento el tratamiento de mis datos.
-                  </label>
+  <label className="form-consent">
+  <input type="checkbox" required /> 
+  <span>He leido y acepto la <a href="#">politica de privacidad</a> y las{" "}
+  <a href="#">bases reguladoras</a>, y consiento el tratamiento de mis datos.</span>
+  </label>
                   <button type="submit" className="btn btn-pri">
                     Enviar solicitud <span className="arw">-&gt;</span>
                   </button>
