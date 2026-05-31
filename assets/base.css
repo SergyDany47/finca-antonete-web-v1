@@ -1,0 +1,138 @@
+/* ============================================================
+   CIA · Centro de Innovación Antonete
+   Sistema visual "El Campo Instrumentado"
+   ============================================================ */
+
+:root{
+  /* Paleta (extraída del PDF de marca) */
+  --bosque:#142a20;        /* verde bosque base */
+  --bosque-900:#0d1d16;    /* más oscuro */
+  --bosque-800:#16301f;
+  --bosque-700:#1d3b2b;
+  --bosque-600:#2a513b;    /* líneas sutiles sobre oscuro */
+  --esmeralda:#5ec89c;     /* la señal */
+  --esmeralda-bright:#43d49a;
+  --oro:#c9a95f;           /* cosecha / numerales */
+  --oro-soft:#d8c08a;
+  --hueso:#f4f1e9;         /* cal manchega / papel */
+  --hueso-200:#eae5d8;
+  --hueso-300:#ded7c4;
+  --tinta:#1c2a22;         /* texto sobre hueso */
+  --tinta-soft:#4b5a50;
+
+  /* Tipografía */
+  --serif:'Newsreader', Georgia, serif;
+  --sans:'Hanken Grotesk', system-ui, sans-serif;
+  --mono:'Space Mono', ui-monospace, monospace;
+
+  /* Ritmo */
+  --maxw:1320px;
+  --gut:clamp(20px,5vw,72px);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--bosque);
+  color:var(--hueso);
+  font-size:18px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--esmeralda);color:var(--bosque)}
+
+/* ---- Tipografía utilitaria ---- */
+.kicker{
+  font-family:var(--mono);
+  font-size:13px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-weight:400;
+  display:inline-flex;align-items:center;gap:.7em;
+}
+.kicker::before{
+  content:"";width:26px;height:1px;background:currentColor;opacity:.6;
+}
+.kicker.esm{color:var(--esmeralda)}
+.kicker.oro{color:var(--oro)}
+
+h1,h2,h3,.display{
+  font-family:var(--serif);
+  font-weight:400;
+  line-height:1.02;
+  letter-spacing:-.015em;
+  text-wrap:balance;
+}
+.display-xl{font-size:clamp(46px,8vw,116px)}
+.display-l{font-size:clamp(38px,5.4vw,82px)}
+.display-m{font-size:clamp(30px,3.6vw,52px)}
+em,.it{font-style:italic}
+.em-esm{color:var(--esmeralda);font-style:italic}
+.em-oro{color:var(--oro);font-style:italic}
+
+.lede{
+  font-size:clamp(19px,1.7vw,24px);
+  line-height:1.5;
+  max-width:48ch;
+  color:color-mix(in srgb,var(--hueso) 84%,transparent);
+}
+.body-mut{color:color-mix(in srgb,var(--hueso) 66%,transparent)}
+
+/* ---- Layout ---- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-inline:var(--gut);position:relative;z-index:1}
+section{position:relative}
+.sec-pad{padding-block:clamp(80px,11vw,180px)}
+
+/* Fondos alternos */
+.bg-bosque{background:var(--bosque);color:var(--hueso)}
+.bg-bosque-900{background:var(--bosque-900);color:var(--hueso)}
+.bg-hueso{background:var(--hueso);color:var(--tinta)}
+.bg-hueso .lede{color:color-mix(in srgb,var(--tinta) 80%,transparent)}
+.bg-hueso .body-mut{color:color-mix(in srgb,var(--tinta) 60%,transparent)}
+.bg-hueso .kicker.esm{color:#2f8f63}
+
+/* Botones — CTA unificada */
+.btn{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:16px;
+  letter-spacing:.01em;
+  display:inline-flex;align-items:center;gap:.7em;
+  padding:16px 28px;
+  border-radius:999px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s;
+  white-space:nowrap;
+}
+.btn .arw{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.btn:hover .arw{transform:translateX(5px)}
+.btn-pri{background:var(--esmeralda);color:var(--bosque)}
+.btn-pri:hover{background:var(--esmeralda-bright);transform:translateY(-2px)}
+.btn-ghost{border-color:color-mix(in srgb,var(--hueso) 30%,transparent);color:var(--hueso)}
+.btn-ghost:hover{border-color:var(--esmeralda);color:var(--esmeralda)}
+.bg-hueso .btn-ghost{border-color:color-mix(in srgb,var(--tinta) 24%,transparent);color:var(--tinta)}
+.bg-hueso .btn-ghost:hover{border-color:#2f8f63;color:#2f8f63}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.08s}
+.reveal.d2{transition-delay:.16s}
+.reveal.d3{transition-delay:.24s}
+.reveal.d4{transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+body.no-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}
+.hero-signal,#campo-canvas{transition:opacity .45s ease}
+
+/* Hairlines */
+.hair{height:1px;background:color-mix(in srgb,var(--hueso) 16%,transparent);border:0}
+.bg-hueso .hair{background:color-mix(in srgb,var(--tinta) 14%,transparent)}
