@@ -6,7 +6,7 @@ import Image from "next/image"
 // Signal Canvas Component
 function SignalCanvas({ id, className }: { id: string; className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -196,8 +196,8 @@ function Carousel() {
 
   const [current, setCurrent] = React.useState(0)
   const [progress, setProgress] = React.useState(0)
-  const intervalRef = useRef<NodeJS.Timeout>()
-  const progressRef = useRef<NodeJS.Timeout>()
+  const intervalRef = useRef<NodeJS.Timeout>(null)
+  const progressRef = useRef<NodeJS.Timeout>(null)
 
   const startAutoplay = React.useCallback(() => {
     if (intervalRef.current) clearInterval(intervalRef.current)
